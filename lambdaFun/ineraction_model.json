@@ -1,0 +1,101 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "greeter",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "HelloIntent",
+                    "slots": [
+                        {
+                            "name": "FirstName",
+                            "type": "GUEST_NAMES"
+                        }
+                    ],
+                    "samples": [
+                        "say hello to {FirstName}",
+                        "wish our {FirstName}",
+                        "wish {FirstName}",
+                        "greet our guest {FirstName}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "GUEST_NAMES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "ricky"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ben"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "jason"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "annie"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mona"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "james"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "jacob"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "madison"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "emma"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "john"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
