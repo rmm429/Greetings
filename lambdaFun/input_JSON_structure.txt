@@ -1,0 +1,41 @@
+Input JSON strucutre:
+
+session:
+
+session (object): data about the current session
+	new (boolean): determines whether the current session is new or not
+	sessionId (string, mixed): ID for the current session
+	attributes (object): some information collected from the current session
+		empty
+	user (object): data about the current user
+		userId (string, mixed): ID for the current user
+	application (object): data about the applicaiton
+		applicationId (string, mixed): ID for the application
+
+version:
+
+version (string, numbers): skill version number
+
+request:
+
+request (object): data containing specific informaiton on the current request (this is where the JSON inputs will differ in structure)
+	
+	LaunchRequest structure:
+
+	type (string, letters): type of the current request
+	requestId (string, mixed): ID for the current request
+
+	IntentRequest strucutre:
+		
+	intent (object): data about each intent that was called for the current request (more JSON input structure difference)
+
+		HelloIntent structure:
+
+		slots (object): data about the slots for the current intent
+			FirstName (object): data about the FirstName slot
+				name (string, letters): variable name of the current FirstName slot
+				value (string, letters): value of the current FirstName slot
+		name (string, letters): name of the the current intent
+
+	type (string, letters): type of the current request
+	requestId (string, mixed): ID for the current request

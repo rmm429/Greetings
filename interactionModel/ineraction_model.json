@@ -37,6 +37,23 @@
                         "greet our guest {FirstName}",
                         "wish {FirstName}"
                     ]
+                },
+                {
+                    "name": "QuoteIntent",
+                    "slots": [],
+                    "samples": [
+                        "get a quote",
+                        "get me a quote"
+                    ]
+                },
+                {
+                    "name": "NextQuoteIntent",
+                    "slots": [],
+                    "samples": [
+                        "yes",
+                        "one more",
+                        "more"
+                    ]
                 }
             ],
             "types": [

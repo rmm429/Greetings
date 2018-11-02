@@ -2,22 +2,20 @@
 
 var http = require('http');
 
+//event = input JSON
 exports.handler = function(event,context) {
 
 	try {
 
+		//specific objects of the event JSON
 		var request = event.request;
 		var session = event.session;
 
+		//Session attributes: pass some information from one intent to another intent
+		//If there are no session attributes, create an empty object for them and place it in the event JSON
 		if(!event.session.attributes) {
 			event.session.attributes = {};
 		}
-
-		/*
-	    	i)   LaunchRequest       Ex: "Open greeter"
-	    	ii)  IntentRequest       Ex: "Say hello to John" or "ask greeter to say hello to John"
-	    	iii) SessionEndedRequest Ex: "exit" or error or timeout
-		*/
 
 		if (request.type === "LaunchRequest") {
 
@@ -36,6 +34,12 @@ exports.handler = function(event,context) {
 			} else if (request.intent.name === "NextQuoteIntent") {
 
 				handleNextQuoteIntent(request,context,session);
+
+			} else if (request.intent.name === "AMAZON.StopIntent" || request.intent.name === "AMAZON.CancelIntent") {
+				context.succeed(buildResponse({
+					speechText: "Good bye. ",
+					endSession: true
+				}));
 
 			} else {
 				throw("Unknown intent");
@@ -94,6 +98,7 @@ function getWish() {
 
 function buildResponse(options) {
 
+	//response = output JSON
 	var response = {
 		version: "1.0",
 		response: {
@@ -148,6 +153,7 @@ function handleHelloIntent(request,context) {
 
 function handleQuoteIntent(request,context,session) {
 	let options = {};
+	//Remembering the current session
 	options.session = session;
 
 	getQuote(function(quote,err) {
@@ -157,7 +163,9 @@ function handleQuoteIntent(request,context,session) {
 			options.speechText = quote;
 			options.speechText += " Do you want to listen to one more quote? ";
 			options.repromptText = "You can say yes or one more. ";
+			//Noting that we are coming from the QuoteIntent
 			options.session.attributes.quoteIntent = true;
+			//Keep repeating until the user wants to stop
 			options.endSession = false;
 			context.succeed(buildResponse(options));
 		}
@@ -167,8 +175,10 @@ function handleQuoteIntent(request,context,session) {
 
 function handleNextQuoteIntent(request,context,session) {
 	let options = {};
+	//Remembering the current session
 	options.session = session;
 
+	//Making sure we came from the QuoteIntent
 	if(session.attributes.quoteIntent) {
 		getQuote(function(quote,err) {
 			if(err) {
@@ -177,13 +187,17 @@ function handleNextQuoteIntent(request,context,session) {
 				options.speechText = quote;
 				options.speechText += " Do you want to listen to one more quote? ";
 				options.repromptText = "You can say yes or one more. ";
+				//since QuoteIntent had to be true to enter this statement, no need to set it again
 				//options.session.attributes.quoteIntent = true;
+				//Keep repeating until the user wants to stop
 				options.endSession = false;
 				context.succeed(buildResponse(options));
 			}
 		});
+	//If this intent was invoked by another intent, notify of wrong invocation
 	} else {
 		options.speechText = " Wrong invocation of this intent. ";
 		options.endSession = true;
+		context.succeed(buildResponse(options));
 	}
 }

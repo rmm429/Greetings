@@ -8,5 +8,3 @@ QuoteIntent get a quote
 NextQuoteIntent more
 NextQuoteIntent one more
 NextQuoteIntent yes
-
-StopIntent
