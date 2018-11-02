@@ -33,9 +33,9 @@
                     ],
                     "samples": [
                         "say hello to {FirstName}",
-                        "wish our {FirstName}",
-                        "wish {FirstName}",
-                        "greet our guest {FirstName}"
+                        "wish our guest {FirstName}",
+                        "greet our guest {FirstName}",
+                        "wish {FirstName}"
                     ]
                 }
             ],
@@ -45,37 +45,7 @@
                     "values": [
                         {
                             "name": {
-                                "value": "ricky"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "ben"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "jason"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "annie"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "mona"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "james"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "jacob"
+                                "value": "Ricky"
                             }
                         },
                         {
@@ -85,12 +55,32 @@
                         },
                         {
                             "name": {
-                                "value": "emma"
+                                "value": "Emma"
                             }
                         },
                         {
                             "name": {
-                                "value": "john"
+                                "value": "Jacob"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "James"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mona"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Annie"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "John"
                             }
                         }
                     ]
