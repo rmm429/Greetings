@@ -32,7 +32,7 @@ Last updated _11/05/2018_
 **version** (_string, numbers_): skill version number
 
 ### request
-**request** (_object_): data containing specific informaiton on the current request
+**request** (_object_): data containing specific informaiton on the current request<br/>
 _NOTE_: there are structure differences
 	
 * ### LaunchRequest structure:
@@ -41,7 +41,7 @@ _NOTE_: there are structure differences
 * **requestId** (_string, mixed_): ID for the current request
 
 * ### IntentRequest structure:
-* **intent** (_object_): data about each intent that was called for the current request
+* **intent** (_object_): data about each intent that was called for the current request<br/>
 _NOTE_: there are structure differences
 
 	* ### HelloIntent structure:
