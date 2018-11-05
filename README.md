@@ -51,8 +51,8 @@ _NOTE_: there are structure differences
 			* **value** (_string, letters_): value of the current FirstName slot
 		* **name** (_string, letters_): name of the the current intent
 
-	* **type** (_string, letters_): type of the current request
-	* **requestId** (_string, mixed_): ID for the current request
+* **type** (_string, letters_): type of the current request
+* **requestId** (_string, mixed_): ID for the current request
 
 # Input JSON example
 **_INSERT WHEN SKILL IS COMPLETED_**
