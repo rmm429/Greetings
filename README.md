@@ -1,7 +1,7 @@
 
 # Greetings skill
-Created by **Richard Mangerie**, taken from **Udemy**
-https://www.udemy.com/comprehensive-alexa-skill-development-course
+Created by **Richard Mangerie**, taken from **Udemy**<br/>
+https://www.udemy.com/comprehensive-alexa-skill-development-course<br/>
 Last updated _11/05/2018_
 
 ## Request types
