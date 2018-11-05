@@ -42,7 +42,7 @@ exports.handler = function(event,context) {
 
 			} else if (request.intent.name === "AMAZON.StopIntent" || request.intent.name === "AMAZON.CancelIntent") {
 				context.succeed(buildResponse({
-					speechText: "Good bye. ",
+					speechText: "Good bye.",
 					endSession: true
 				}));
 
@@ -93,20 +93,22 @@ function getWish() {
 	}
 
 	if (hours < 12) {
-		return "Good Morning. ";
+		return "Good Morning.";
 	} else if (hours < 18) {
-		return "Good afternoon. ";
+		return "Good afternoon.";
 	} else {
-		return "Good evening. ";
+		return "Good evening.";
 	}
 }
 
 function buildResponse(options) {
-	
+
 	//Outputting the response options to the console
 	if(process.env.NODE_DEBUG_EN) {
 		console.log("\nbuildResponse options:\n" + JSON.stringify(options,null,2));
 	}
+
+	options.speechText = addSpacing(options.speechText);
 
 	//response = output JSON
 	var response = {
@@ -121,6 +123,9 @@ function buildResponse(options) {
 	};
 
 	if(options.repromptText) {
+
+		options.repromptText = addSpacing(options.repromptText);
+
 		response.response.reprompt = {
 			outputSpeech: {
 				type: "SSML",
@@ -164,8 +169,8 @@ function buildResponse(options) {
 
 function handleLaunchRequest(context) {
 	let options = {};
-	options.speechText = "Welcome to Greetings skill.  Using our skill you can greet your guests.  Who would you like to greet? ";
-	options.repromptText = "You can say for example, say hello to John. ";
+	options.speechText = "Welcome to Greetings skill.Using our skill you can greet your guests.Who would you like to greet?";
+	options.repromptText = "You can say for example, say hello to John.";
 	options.endSession = false;
 	context.succeed(buildResponse(options));
 }
@@ -173,7 +178,7 @@ function handleLaunchRequest(context) {
 function handleHelloIntent(request,context) {
 	let options = {};
 	let name = request.intent.slots.FirstName.value;
-	options.speechText = `Hello <say-as interpret-as="spell-out">${name}</say-as> ${name}. `;
+	options.speechText = `Hello <say-as interpret-as="spell-out">${name}</say-as> ${name}.`;
 	options.speechText += getWish();
 
 	options.cardTitle = `Hello ${name}!`;
@@ -201,8 +206,8 @@ function handleQuoteIntent(request,context,session) {
 			context.fail(err);
 		} else {
 			options.speechText = quote;
-			options.speechText += " Do you want to listen to one more quote? ";
-			options.repromptText = "You can say yes or one more. ";
+			options.speechText += "Do you want to listen to one more quote?";
+			options.repromptText = "You can say yes or one more.";
 			//Noting that we are coming from the QuoteIntent
 			options.session.attributes.quoteIntent = true;
 			//Keep repeating until the user wants to stop
@@ -225,8 +230,8 @@ function handleNextQuoteIntent(request,context,session) {
 				context.fail(err);
 			} else {
 				options.speechText = quote;
-				options.speechText += " Do you want to listen to one more quote? ";
-				options.repromptText = "You can say yes or one more. ";
+				options.speechText += "Do you want to listen to one more quote?";
+				options.repromptText = "You can say yes or one more.";
 				//since QuoteIntent had to be true to enter this statement, no need to set it again
 				//options.session.attributes.quoteIntent = true;
 				//Keep repeating until the user wants to stop
@@ -236,8 +241,27 @@ function handleNextQuoteIntent(request,context,session) {
 		});
 	//If this intent was invoked by another intent, notify of wrong invocation
 	} else {
-		options.speechText = " Wrong invocation of this intent. ";
+		options.speechText = "Wrong invocation of this intent.";
 		options.endSession = true;
 		context.succeed(buildResponse(options));
 	}
+}
+
+function addSpacing(text) {
+
+	/*
+		Two spaces after period, question mark, and/or exclamation point, one space after final period, question mark, and/or exclamation point.
+		Incoming string has no spaces after any period, question mark, and/or exclamation point (with the exception of a justifiable use of a period, e.g. "Mr. Jones").
+	*/
+
+	//Find period with no space after it, replace with period with two spaces after it
+	var textSpace = text.replace(/\.(?=[^ ])/g, ".  ");
+	//Find question mark with no space after it, replace with question mark with two spaces after it
+	textSpace = textSpace.replace(/\?(?=[^ ])/g, "?  ");
+	//Find exclamation point with no space after it, replace with exclamation point with two spaces after it
+	textSpace = textSpace.replace(/\!(?=[^ ])/g, "!  ");
+
+	//Add a final space onto the end of the string and return the string
+	return textSpace + " ";
+
 }
