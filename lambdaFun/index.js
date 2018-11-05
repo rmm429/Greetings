@@ -129,7 +129,7 @@ function buildResponse(options) {
 		response.response.reprompt = {
 			outputSpeech: {
 				type: "SSML",
-				text: "<speak>" + options.repromptText + "</speak>"
+				ssml: "<speak>" + options.repromptText + "</speak>"
 			}
 		};
 	}
