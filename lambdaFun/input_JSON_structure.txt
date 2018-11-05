@@ -2,11 +2,24 @@ Input JSON strucutre:
 
 session:
 
-session (object): data about the current session
+session (object): data about the current session (NOTE: there are structure differences)
+
+	LaunchRequest, HelloIntnet (IntentRequest), QuoteIntent (IntentRequest), and AMAZON.StopIntent (IntentRequest) structure:
+
 	new (boolean): determines whether the current session is new or not
 	sessionId (string, mixed): ID for the current session
-	attributes (object): some information collected from the current session
-		empty
+	user (object): data about the current user
+		userId (string, mixed): ID for the current user
+	application (object): data about the applicaiton
+		applicationId (string, mixed): ID for the application
+
+	NextQuoteIntent (IntentRequest) structure:
+
+	new (boolean): determines whether the current session is new or not
+	sessionId (string, mixed): ID for the current session
+	attributes (object): some information collected from the current session (NOTE: there are structure differences)
+		quoteIntent (boolean): checking to see if this intent was invoked from the intent QuoteIntent
+		DOES NOT EXIST: the attributes object will not exist if this intent was not invoked from the intent QuoteIntent
 	user (object): data about the current user
 		userId (string, mixed): ID for the current user
 	application (object): data about the applicaiton
@@ -18,7 +31,7 @@ version (string, numbers): skill version number
 
 request:
 
-request (object): data containing specific informaiton on the current request (this is where the JSON inputs will differ in structure)
+request (object): data containing specific informaiton on the current request (NOTE: there are structure differences)
 	
 	LaunchRequest structure:
 
@@ -27,7 +40,7 @@ request (object): data containing specific informaiton on the current request (t
 
 	IntentRequest strucutre:
 		
-	intent (object): data about each intent that was called for the current request (more JSON input structure difference)
+	intent (object): data about each intent that was called for the current request (NOTE: there are structure differences)
 
 		HelloIntent structure:
 
@@ -36,6 +49,10 @@ request (object): data containing specific informaiton on the current request (t
 				name (string, letters): variable name of the current FirstName slot
 				value (string, letters): value of the current FirstName slot
 		name (string, letters): name of the the current intent
+
+		QuoteIntent, NextQuoteIntent, and AMAZON.StopIntent structure:
+
+		name (string, letters): name of the current intent
 
 	type (string, letters): type of the current request
 	requestId (string, mixed): ID for the current request

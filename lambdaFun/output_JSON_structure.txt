@@ -1,0 +1,57 @@
+Output JSON strucutre:
+
+body:
+
+body (object): data containing the response information (NOTE: there are structure differences)
+
+	LaunchRequest, HelloIntent (IntentRequest), and AMAZON.StopIntent (IntentRequest) structure:
+
+	version (string, numbers): the current version of the skill
+	response (object): data containing the speech information (NOTE: there are structure differences)
+
+		LaunchRequest structure:
+
+		outputSpeech (object): data containing the output speech
+			type (string, letters): the type of the output speech
+			ssml (string, mixed): the actual output speech encoded in a markup language
+		reprompt (object): data containing the reprompt information
+			outputSpeech (object): data containing the output speech for the reprompt
+				type (string, letters): the type of the output speech for the reprompt
+				ssml (string, mixed): the actual output speech for the reprompt encoded in a markup language
+		shouldEndSession (boolean): seeing if the current session should be ended or not
+
+		HelloIntent (IntentRequest) structure:
+
+		outputSpeech (object): data containing the output speech
+			type (string, letters): the type of the output speech
+			ssml (string, mixed): the actual output speech encoded in a markup language
+		card (object): data containing the card information
+			type (string, letters): the type of the current card
+			title (string, mixed): the title of the current card
+			text (string, mixed): the text of the current card
+			image (object): data containing the image information for the current card
+				smallImageUrl (string, mixed): the URL of the small image for the current card
+				largeImageUrl (string, mixed): the URL of the large image for the current card
+		shouldEndSession (boolean): seeing if the current session should be ended or not
+
+		AMAZON.StopIntent (IntentRequest) structure:
+
+		outputSpeech (object): data containing the output speech
+			type (string, letters): the type of the output speech
+			ssml (string, mixed): the actual output speech encoded in a markup language
+		shouldEndSession (boolean): seeing if the current session should be ended or not
+
+	QuoteIntent (IntentRequest) and NextQuoteIntent (IntentRequest) structure:
+
+	version (string, numbers): the current version of the skill
+	response (object): data containing the speech information (NOTE: there are structure differences)
+		outputSpeech (object): data containing the output speech
+			type (string, letters): the type of the output speech
+			ssml (string, mixed): the actual output speech encoded in a markup language
+		reprompt (object): data containing the reprompt information
+			outputSpeech (object): data containing the output speech for the reprompt
+				type (string, letters): the type of the output speech for the reprompt
+				ssml (string, mixed): the actual output speech for the reprompt encoded in a markup language
+		shouldEndSession (boolean): seeing if the current session should be ended or not
+	sessionAttributes (object): data containing the information from the current session
+		quoteIntent (boolean): seeing if the current intent is QuoteIntent
