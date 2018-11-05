@@ -7,6 +7,11 @@ exports.handler = function(event,context) {
 
 	try {
 
+		//Outputting the input JSON to the console
+		if(process.env.NODE_DEBUG_EN) {
+			console.log("Request:\n" + JSON.stringify(event,null,2));
+		}
+
 		//specific objects of the event JSON
 		var request = event.request;
 		var session = event.session;
@@ -97,6 +102,11 @@ function getWish() {
 }
 
 function buildResponse(options) {
+	
+	//Outputting the response options to the console
+	if(process.env.NODE_DEBUG_EN) {
+		console.log("\nbuildResponse options:\n" + JSON.stringify(options,null,2));
+	}
 
 	//response = output JSON
 	var response = {
@@ -141,6 +151,11 @@ function buildResponse(options) {
 
 	if(options.session && options.session.attributes) {
 		response.sessionAttributes = options.session.attributes;
+	}
+
+	//Outputting the output JSON to the console
+	if(process.env.NODE_DEBUG_EN) {
+		console.log("\nResponse:\n" + JSON.stringify(response,null,2));
 	}
 
 	return response;
